@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+*.geojsonl
+*.mbtiles
 # C extensions
 *.so
 
