@@ -4,7 +4,7 @@ Guessing a user's _home location_ is a very complicated task. It has been attemp
 
 1. Can we embed full-history into a an `mbtiles` file format so that we can use the parallel power of tile-reduce to analyze historical OSM data?
 
-1. Can looking at the details of the tags that a user adds or changes on the map be enough to tell us about their home location?
+1. Can looking at the details of the tags that a user adds or changes on the map be enough to tell us about their home location? ( Similar to the approach taken by [Zielstra et al. 2014](http://www.mdpi.com/2220-9964/3/4/1211) )
 
 ## Status
 
