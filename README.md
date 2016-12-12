@@ -24,12 +24,13 @@ Guessing a user's _home location_ is a very complicated task. It has been attemp
       @user: <str>,
       @uid: <#>,
       @version: 5,
+      @changeset: <#>
       tag_1: <str>,
       tag_2: <str>,
       tag_3: <#>,
       ...
 
-      // New stuff...
+      // New stuff... (This will only exist if there is history for this object)
       *@object_history: [
         {
           version: 1,
@@ -90,7 +91,7 @@ Guessing a user's _home location_ is a very complicated task. It has been attemp
           uid: <#>,
           changeset: <#>,
           created_at: <isodate>,
-          *geometry: { //This user changed the road to its current geometry
+          *geometry_change: { //This user changed the road to its current geometry
             old: <geojson /* geometry as it was in version4 */>
             new: <geojson /* current geometry */>
           },
