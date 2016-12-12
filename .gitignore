@@ -4,7 +4,9 @@ __pycache__/
 *$py.class
 
 *.geojsonl
-*.mbtiles
+*.mbtiles*
+
+*.json
 # C extensions
 *.so
 

@@ -9,12 +9,19 @@ Guessing a user's _home location_ is a very complicated task. It has been attemp
 ## Status
 
  - Can successfully get the area of Boulder, CO into an `.mbtiles` format with the following arguments: 
+ 
         $ tippecanoe -o boulder_history.mbtiles -Pf -ps -pt -pf -pk -Z12 -z12 -d14 -l osm -n osm boulder_history.geojsonl
         
  - Working with the state of CO (osm history file is ~100MB with 2.7M ways, 1.4M unique ways and 3.6M unique nodes) requires > 45GB of RAM. Ouch. This will not scale very well as is, the full-history file itself is 50+GB, CO represents 0.2% of the file. If we cut the world up into sections the size of CO, it will take about 15+ days to run the planet on a 32 core server with 128GB of RAM. The good news... we could probably do this?
 
 
+ - 201,534 is the maximum length of a string (characters) that gets encoded by tippecanoe. The `@object_history` object in the tile is passed to tile-reduce as a string and needs to be parsed back to JSON. It consistently fails with strings of this length.
 
+ - Can currently process the state of Colorado for a list of editors and a count of the `name` tags they have added to existing objects in 11 seconds!
+ 
+ 
+ 
+ 
 
 ## Current Schema 
 
