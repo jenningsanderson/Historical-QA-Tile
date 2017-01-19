@@ -3,45 +3,28 @@ var fs = require('fs')
 var path = require('path');
 
 //var inFile = '/data/tiles2/planet-20160916.mbtiles'
-var inFile = '/home/anderstj/dumpster-fire/colorado_history_no_geometry.mbtiles'
+var inFile = '/home/anderstj/dumpster-fire/nepal_history_no_geometry.mbtiles'
 
-var outFile = 'tmp.log'
+var outFile = fs.createWriteStream('nepal_edit_timetstamps.csv')
 
-var final_users = {}
+outFile.write("user, time, version, changeset\n")
+
+var errors = 0;
 
 tileReduce({
-//     bbox: [-105.301453,39.964348,-105.178093,40.09441],
+//    bbox: [-105.301453,39.964348,-105.178093,40.09441],
     zoom: 12,
     map: '/home/anderstj/dumpster-fire/map.js',
     sources: [{
         name: 'osm',
         mbtiles: path.join(inFile), 
         raw: false}],
-    output: fs.createWriteStream(outFile),
+    output: outFile,
     maxWorkers: 28
 })
-.on('reduce', function(users) {
-    Object.keys(users).forEach(function(u){
-        if(final_users.hasOwnProperty(u)){
-            final_users.u += users[u]
-        }else{
-            final_users[u] = users[u]
-        }
-    });
+.on('reduce', function(res) {
+    errors+= res
 })
 .on('end', function() {
-    var sortable = [];
-    for (var user in final_users)
-        sortable.push([user, final_users[user]])
-
-    sortable.sort(function(a, b) {
-        return a[1] - b[1]
-    })
-    
-    sortable.reverse()
-    
-    fs.writeFileSync('tag_counts.json',JSON.stringify(sortable))
-    console.log('done')
+    console.log("done with " + errors + " errors")
 });
-null
-
